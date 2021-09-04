@@ -1,13 +1,16 @@
 import os
-from flask import Flask, request, abort, jsonify
+from flask import (
+  Flask, request, abort, jsonify, render_template
+)
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-
+from models import (
+    setup_db,
+    user,
+    order,
+    pizza
+)
 #General Specifications:
-
-# Models will include at least:
-# 1- Two classes with primary keys at at least two attributes each
-# 2- [Optional but encouraged] One-to-many or many-to-many relationships between classes
 
 # Endpoints will include at least:
 # 1- Two GET requests
@@ -26,8 +29,22 @@ from flask_cors import CORS
 
 def create_app(test_config=None):
   # create and configure the app
-  app = Flask(__name__)
-  CORS(app)
+  app = Flask(__name__, template_folder='templates')
+  setup_db(app)
+
+  CORS(app, resources={r"/*": {"origins": "*"}})
+
+  @app.after_request
+  def after_request(response):
+        response.headers.add('Access-Control-Allow-Headers',
+                             'Content-Type, Authorization')
+        response.headers.add('Access-Control-Allow-Methods',
+                             'GET, POST, PATCH, DELETE, OPTIONS')
+        return response
+
+  @app.route('/')
+  def index():
+    return render_template('index.html')
 
   return app
 
