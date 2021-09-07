@@ -37,13 +37,15 @@ def setup_db(app, database_path=database_path):
 class user(db.Model):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.String)
+    email = db.Column(db.String)
     address = db.Column(db.String(120))
     phone = db.Column(db.String(120))
 
     order = db.relationship('order', backref='user', lazy=True)
 
-    def __init__(self, name, address, phone):
+    def __init__(self, name, email, address, phone):
         self.name = name
+        self.email =email
         self.address = address
         self.phone = phone
 
@@ -62,6 +64,7 @@ class user(db.Model):
         return {
             "id": self.id,
             "name": self.name,
+            "email": self.email,
             "address": self.address,
             "phone": self.phone,
         }

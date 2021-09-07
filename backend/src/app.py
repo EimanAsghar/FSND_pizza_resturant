@@ -79,6 +79,7 @@ def create_app(test_config=None):
         # create user object
         new_user = user(
             name=request.get_json().get('name'),
+            email=request.get_json().get('email'),
             address=request.get_json().get('address'),
             phone=request.get_json().get('phone')
         )
@@ -111,16 +112,23 @@ def create_app(test_config=None):
 
         return jsonify({'success': True, 'pizza': [new_pizza.information()]}), 200
 
-    @app.route('/orders', methods=['POST'])
-    def create_orders():
 
-        ordertime = datetime.datetime.now()
+    @app.route('/orders/<int:user_id>/create', methods=['POST'])
+    def create_orders(user_id):
+       
+        find_user = user.query.filter(user.id == user_id).one_or_none()
+
+        if find_user is None:
+            abort(404)
+
+        ordertime = datetime.now()
         pickuptime = ordertime + timedelta(minutes=45)
         formatted_ordertime = ordertime.isoformat()
         formatted_pickuptime = pickuptime.isoformat()
 
     # create order object
         new_order = order(
+            user_id=json.dumps(user_id),
             pizza_id=request.get_json().get('pizza_id'),
             quantity=request.get_json().get('quantity'),
             order_time=json.dumps(formatted_ordertime),
@@ -136,32 +144,35 @@ def create_app(test_config=None):
 
         return jsonify({'success': True, 'order': [new_order.information()]}), 200
 
+#-------------------------- ERROR -----------------------------------------
     # 3- One PATCH request
     @app.route('/pizza/<int:pizza_id>', methods=['PATCH'])
     def edit_pizza(pizza_id):
 
         # get spacific pizza by id
         pizza_result = pizza.query.filter(pizza.id == pizza_id).one_or_none()
-        body = request.get_json()
 
         # send error if it not found
         if pizza_result is None:
             abort(404)
 
+        body = request.get_json()
+
         if 'name' in body:
-            pizza_result.name = request.get_json().get('name')
+            pizza_result.name = body.get('name')
 
         elif 'price' in body:
-            pizza_result.price = request.get_json().get('price')
+            pizza_result.price = body.get('price')
 
         elif 'ingredients' in body:
-            pizza_result.ingredients = request.get_json().get('ingredients')
+            pizza_result.ingredients = body.get('ingredients')
+
 
         pizza_result.update()
 
         return jsonify({
             'success': True,
-            'pizza': [p.information() for p in pizza_result]
+            'pizza': pizza_result
         }), 200
 
     # 4- One DELETE request
