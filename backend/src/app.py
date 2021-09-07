@@ -11,6 +11,8 @@ from models import (
     pizza
 )
 from datetime import datetime, timedelta
+import json
+
 # General Specifications:
 
 # Endpoints will include at least:
@@ -61,7 +63,7 @@ def create_app(test_config=None):
 
     @app.route('/orders')
     def get_orders():
-        order_result = order.query.all()
+        order_result = order.query.order_by(order.order_time.desc()).all()
         order_info = [o.information() for o in order_result]
 
         return jsonify({
@@ -71,18 +73,81 @@ def create_app(test_config=None):
 
     # 2- One POST request
 
+    @app.route('/users', methods=['POST'])
+    def create_account():
+
+        # create user object
+        new_user = user(
+            name=request.get_json().get('name'),
+            address=request.get_json().get('address'),
+            phone=request.get_json().get('phone')
+        )
+
+        try:
+            new_user.insert()
+
+        except:
+            # send error
+            abort(422)
+
+        return jsonify({'success': True, 'user': [new_user.information()]}), 200
+
+    @app.route('/pizza', methods=['POST'])
+    def add_new_pizza():
+
+        # create user object
+        new_pizza = pizza(
+            name=request.get_json().get('name'),
+            price=request.get_json().get('price'),
+            ingredients=request.get_json().get('ingredients')
+        )
+
+        try:
+            new_pizza.insert()
+
+        except:
+            # send error
+            abort(422)
+
+        return jsonify({'success': True, 'pizza': [new_pizza.information()]}), 200
+
+    @app.route('/orders', methods=['POST'])
+    def create_orders():
+
+        ordertime = datetime.datetime.now()
+        pickuptime = ordertime + timedelta(minutes=45)
+        formatted_ordertime = ordertime.isoformat()
+        formatted_pickuptime = pickuptime.isoformat()
+
+    # create order object
+        new_order = order(
+            pizza_id=request.get_json().get('pizza_id'),
+            quantity=request.get_json().get('quantity'),
+            order_time=json.dumps(formatted_ordertime),
+            pickup_time=json.dumps(formatted_pickuptime)
+        )
+
+        try:
+            new_order.insert()
+
+        except:
+            # send error
+            abort(422)
+
+        return jsonify({'success': True, 'order': [new_order.information()]}), 200
+
     # 3- One PATCH request
     @app.route('/pizza/<int:pizza_id>', methods=['PATCH'])
     def edit_pizza(pizza_id):
 
-        #get spacific pizza by id
+        # get spacific pizza by id
         pizza_result = pizza.query.filter(pizza.id == pizza_id).one_or_none()
         body = request.get_json()
 
         # send error if it not found
         if pizza_result is None:
             abort(404)
-        
+
         if 'name' in body:
             pizza_result.name = request.get_json().get('name')
 
@@ -91,7 +156,6 @@ def create_app(test_config=None):
 
         elif 'ingredients' in body:
             pizza_result.ingredients = request.get_json().get('ingredients')
-
 
         pizza_result.update()
 

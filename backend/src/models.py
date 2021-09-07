@@ -60,6 +60,7 @@ class user(db.Model):
 
     def information(self):
         return {
+            "id": self.id,
             "name": self.name,
             "address": self.address,
             "phone": self.phone,
@@ -94,6 +95,7 @@ class order(db.Model):
 
     def information(self):
         return {
+            "id": self.id,
             "user_id": self.user_id,
             "pizza_id": self.pizza_id,
             "quantity": self.quantity,
