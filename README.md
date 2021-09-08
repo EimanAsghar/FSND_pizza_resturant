@@ -43,15 +43,15 @@ python -m flask run
 
 
 ## Endpoints 
-### GET 
+#### GET 
 
-### GET 
+#### GET 
 
-### POST
+#### POST
 
-### PATCH
+#### PATCH
 
-### DELETE
+#### DELETE
 
 ## Testing
 To run the tests, run
