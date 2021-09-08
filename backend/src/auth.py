@@ -5,9 +5,9 @@ from jose import jwt
 from urllib.request import urlopen
 
 
-# AUTH0_DOMAIN = 'fsnd-coffeshop-project.us.auth0.com'
-# ALGORITHMS = ['RS256']
-# API_AUDIENCE = 'dev'
+AUTH0_DOMAIN = 'fsnd-pizza-restaurant.us.auth0.com'
+ALGORITHMS = ['RS256']
+API_AUDIENCE = 'dev'
 
 # AuthError Exception
 

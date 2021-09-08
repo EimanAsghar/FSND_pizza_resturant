@@ -12,7 +12,7 @@ from models import (
 )
 from datetime import datetime, timedelta
 import json
-from .auth.auth import AuthError, requires_auth
+from auth import AuthError, requires_auth
 
 # General Specifications:
 
@@ -78,7 +78,8 @@ def create_app(test_config=None):
 
     # view order for spacific customer
     @app.route('/orders/<int:userid>')
-    def get_spacific_orders(userid):
+    @requires_auth('get:specific_orders')
+    def get_spacific_orders(payload, userid):
 
         find_user = user.query.filter(user.id == userid).one_or_none()
 
