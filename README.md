@@ -1,6 +1,7 @@
 # Pizza Resturant
-# Introduction: 
+
 # Geting Started: 
+
 # Backend
 ### Installing Dependencies for the Backend
 
