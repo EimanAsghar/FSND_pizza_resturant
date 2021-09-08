@@ -42,7 +42,7 @@ class PizzaResturantTestCase(unittest.TestCase):
 
     # Success for all pizza
     def test_get_all_pizza(self):
-        res = self.client().get('/pizza)
+        res = self.client().get('/pizza')
         data = json.loads(res.data)
         # check the status code
         self.assertEqual(res.status_code, 200)
@@ -55,7 +55,7 @@ class PizzaResturantTestCase(unittest.TestCase):
 
     # Success for all order
     def test_get_all_orders(self):
-        res = self.client().get('/orders)
+        res = self.client().get('/orders')
         data = json.loads(res.data)
         # check the status code
         self.assertEqual(res.status_code, 200)
