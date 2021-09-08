@@ -52,3 +52,13 @@ python -m flask run
 ### PATCH
 
 ### DELETE
+
+## Testing
+To run the tests, run
+```
+dropdb resturant_test
+createdb resturant_test
+psql resturant_test < resturant.psql
+python test_flaskr.py
+```
+
