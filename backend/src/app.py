@@ -12,6 +12,7 @@ from models import (
 )
 from datetime import datetime, timedelta
 import json
+from .auth.auth import AuthError, requires_auth
 
 # General Specifications:
 
@@ -50,9 +51,9 @@ def create_app(test_config=None):
     def index():
         return render_template('index.html')
 
-
-    #-------------------------------GET----------------------------------------------
+    # -------------------------------GET----------------------------------------------
     # get all pizza for (customers + manager)
+
     @app.route('/pizza')
     def get_pizza():
         pizza_result = pizza.query.all()
@@ -65,7 +66,8 @@ def create_app(test_config=None):
 
     # view all order for manager
     @app.route('/orders')
-    def get_orders():
+    @requires_auth('get:orders')
+    def get_orders(payload):
         order_result = order.query.order_by(order.order_time.desc()).all()
         order_info = [o.information() for o in order_result]
 
@@ -77,15 +79,16 @@ def create_app(test_config=None):
     # view order for spacific customer
     @app.route('/orders/<int:userid>')
     def get_spacific_orders(userid):
-        
+
         find_user = user.query.filter(user.id == userid).one_or_none()
 
         if find_user is None:
             abort(404)
 
-        order_result = order.query.filter(order.user_id == userid).order_by(order.order_time.desc()).all()
+        order_result = order.query.filter(
+            order.user_id == userid).order_by(order.order_time.desc()).all()
 
-        if order_result is None: 
+        if order_result is None:
             abort(404)
 
         order_info = [o.information() for o in order_result]
@@ -95,14 +98,14 @@ def create_app(test_config=None):
             "order": order_info
         }), 200
 
-    #-------------------------------POST----------------------------------------------
-    # create new account 
+    # -------------------------------POST----------------------------------------------
+    # create new account
     @app.route('/users', methods=['POST'])
     def create_account():
 
         body = request.get_json()
 
-        if ('name' not in body) or ('email' not in body) or ('address' not in body)  or ('phone' not in body):
+        if ('name' not in body) or ('email' not in body) or ('address' not in body) or ('phone' not in body):
             abort(422)
 
         # create user object
@@ -113,15 +116,14 @@ def create_app(test_config=None):
             phone=request.get_json().get('phone')
         )
 
-
         new_user.insert()
-
 
         return jsonify({'success': True, 'user': [new_user.information()]}), 200
 
     # add new pizza by (Manager)
     @app.route('/pizza', methods=['POST'])
-    def add_new_pizza():
+    @requires_auth('post:pizza')
+    def add_new_pizza(payload):
 
         body = request.get_json()
         if ('name' not in body) or ('price' not in body) or ('ingredients' not in body):
@@ -134,24 +136,23 @@ def create_app(test_config=None):
             ingredients=request.get_json().get('ingredients')
         )
 
-    
         new_pizza.insert()
 
         return jsonify({'success': True, 'pizza': [new_pizza.information()]}), 200
 
     # make order for (customers)
     @app.route('/orders/<int:user_id>/create', methods=['POST'])
-    def create_orders(user_id):
-       
+    @requires_auth('post:orders')
+    def create_orders(payload, user_id):
+
         find_user = user.query.filter(user.id == user_id).one_or_none()
 
         if find_user is None:
             abort(404)
-        
+
         body = request.get_json()
         if ('pizza_id' not in body) or ('quantity' not in body):
             abort(422)
-
 
         ordertime = datetime.now()
         pickuptime = ordertime + timedelta(minutes=45)
@@ -167,17 +168,16 @@ def create_app(test_config=None):
             pickup_time=json.dumps(formatted_pickuptime)
         )
 
-     
         new_order.insert()
 
         return jsonify({'success': True, 'order': [new_order.information()]}), 200
 
-
-    
-    #-------------------------------PATCH----------------------------------------------
+    # -------------------------------PATCH----------------------------------------------
     # Edit pizza details by (Manager)
+
     @app.route('/pizza/<int:pizza_id>', methods=['PATCH'])
-    def edit_pizza(pizza_id):
+    @requires_auth('patch:pizza')
+    def edit_pizza(payload, pizza_id):
 
         # get spacific pizza by id
         pizza_result = pizza.query.filter(pizza.id == pizza_id).one_or_none()
@@ -197,7 +197,6 @@ def create_app(test_config=None):
         elif 'ingredients' in body:
             pizza_result.ingredients = body.get('ingredients')
 
-
         pizza_result.update()
 
         return jsonify({
@@ -205,11 +204,12 @@ def create_app(test_config=None):
             'pizza': pizza_result.information()
         }), 200
 
-    
-    #-------------------------------DELETE----------------------------------------------
+    # -------------------------------DELETE----------------------------------------------
     # Delete spacifi pizza by (Manager)
+
     @app.route('/pizza/<int:pizza_id>', methods=['DELETE'])
-    def delete_pizza(pizza_id):
+    @requires_auth('delete:pizza')
+    def delete_pizza(payload, pizza_id):
         try:
             # delete pizza based on spacific id
             find_pizza = pizza.query.filter(
@@ -248,6 +248,14 @@ def create_app(test_config=None):
             "error": 400,
             "message": "Bad Request"
         }), 400
+
+    @app.errorhandler(AuthError)
+    def authentication_error(error):
+        return jsonify({
+            'success': False,
+            'error': error.status_code,
+            'message': error.error.get('description')
+        }), error.status_code
 
     return app
 
