@@ -50,7 +50,9 @@ def create_app(test_config=None):
     def index():
         return render_template('index.html')
 
-    # 1- Two GET requests
+
+    #-------------------------------GET----------------------------------------------
+    # get all pizza for (customers + manager)
     @app.route('/pizza')
     def get_pizza():
         pizza_result = pizza.query.all()
@@ -61,6 +63,7 @@ def create_app(test_config=None):
             "pizza": pizza_info
         }), 200
 
+    # view all order for manager
     @app.route('/orders')
     def get_orders():
         order_result = order.query.order_by(order.order_time.desc()).all()
@@ -71,10 +74,36 @@ def create_app(test_config=None):
             "order": order_info
         }), 200
 
-    # 2- One POST request
+    # view order for spacific customer
+    @app.route('/orders/<int:userid>')
+    def get_spacific_orders(userid):
+        
+        find_user = user.query.filter(user.id == userid).one_or_none()
 
+        if find_user is None:
+            abort(404)
+
+        order_result = order.query.filter(order.user_id == userid).order_by(order.order_time.desc()).all()
+
+        if order_result is None: 
+            abort(404)
+
+        order_info = [o.information() for o in order_result]
+
+        return jsonify({
+            "success": True,
+            "order": order_info
+        }), 200
+
+    #-------------------------------POST----------------------------------------------
+    # create new account 
     @app.route('/users', methods=['POST'])
     def create_account():
+
+        body = request.get_json()
+
+        if ('name' not in body) or ('email' not in body) or ('address' not in body)  or ('phone' not in body):
+            abort(422)
 
         # create user object
         new_user = user(
@@ -84,17 +113,19 @@ def create_app(test_config=None):
             phone=request.get_json().get('phone')
         )
 
-        try:
-            new_user.insert()
 
-        except:
-            # send error
-            abort(422)
+        new_user.insert()
+
 
         return jsonify({'success': True, 'user': [new_user.information()]}), 200
 
+    # add new pizza by (Manager)
     @app.route('/pizza', methods=['POST'])
     def add_new_pizza():
+
+        body = request.get_json()
+        if ('name' not in body) or ('price' not in body) or ('ingredients' not in body):
+            abort(422)
 
         # create user object
         new_pizza = pizza(
@@ -103,16 +134,12 @@ def create_app(test_config=None):
             ingredients=request.get_json().get('ingredients')
         )
 
-        try:
-            new_pizza.insert()
-
-        except:
-            # send error
-            abort(422)
+    
+        new_pizza.insert()
 
         return jsonify({'success': True, 'pizza': [new_pizza.information()]}), 200
 
-
+    # make order for (customers)
     @app.route('/orders/<int:user_id>/create', methods=['POST'])
     def create_orders(user_id):
        
@@ -120,6 +147,11 @@ def create_app(test_config=None):
 
         if find_user is None:
             abort(404)
+        
+        body = request.get_json()
+        if ('pizza_id' not in body) or ('quantity' not in body):
+            abort(422)
+
 
         ordertime = datetime.now()
         pickuptime = ordertime + timedelta(minutes=45)
@@ -135,17 +167,15 @@ def create_app(test_config=None):
             pickup_time=json.dumps(formatted_pickuptime)
         )
 
-        try:
-            new_order.insert()
-
-        except:
-            # send error
-            abort(422)
+     
+        new_order.insert()
 
         return jsonify({'success': True, 'order': [new_order.information()]}), 200
 
-#-------------------------- ERROR -----------------------------------------
-    # 3- One PATCH request
+
+    
+    #-------------------------------PATCH----------------------------------------------
+    # Edit pizza details by (Manager)
     @app.route('/pizza/<int:pizza_id>', methods=['PATCH'])
     def edit_pizza(pizza_id):
 
@@ -172,11 +202,12 @@ def create_app(test_config=None):
 
         return jsonify({
             'success': True,
-            'pizza': pizza_result
+            'pizza': pizza_result.information()
         }), 200
 
-    # 4- One DELETE request
-
+    
+    #-------------------------------DELETE----------------------------------------------
+    # Delete spacifi pizza by (Manager)
     @app.route('/pizza/<int:pizza_id>', methods=['DELETE'])
     def delete_pizza(pizza_id):
         try:
