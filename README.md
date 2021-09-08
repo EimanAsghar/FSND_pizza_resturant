@@ -102,13 +102,88 @@ python -m flask run
 }
 
 ```
+#### GET /orders/<int:userid>
+```bash
+{
+    "order": [
+        {
+            "id": 4,
+            "order_time": "09/07/2021, 22:52:48",
+            "pickup_time": "09/07/2021, 23:37:48",
+            "pizza_id": 1,
+            "quantity": 5,
+            "user_id": 4
+        }
+    ],
+    "success": true
+}
+```
+#### POST /users
+```bash
+{
+    "success": true,
+    "user": [
+        {
+            "address": "albsaten",
+            "email": "bayan@gmail.com",
+            "id": 9,
+            "name": "bayan",
+            "phone": "0548673985"
+        }
+    ]
+}
+```
 
-#### POST
+#### POST /pizza
+```bash
+{
+    "pizza": [
+        {
+            "id": 5,
+            "ingredients": "A Combination of Cheeses: 2 Layers of Mozzarella, Feta, American cheese, Oregano & Signature Tomato Sauce",
+            "name": "Four Cheeses",
+            "price": 30
+        }
+    ],
+    "success": true
+}
+```
 
-#### PATCH
-
-#### DELETE
-
+#### POST /orders/<int:user_id>/create
+```bash
+{
+    "order": [
+        {
+            "id": 5,
+            "order_time": "09/08/2021, 03:36:22",
+            "pickup_time": "09/08/2021, 04:21:22",
+            "pizza_id": 2,
+            "quantity": 5,
+            "user_id": 1
+        }
+    ],
+    "success": true
+}
+```
+#### PATCH /pizza/<int:pizza_id>
+```bash
+{
+    "pizza": {
+        "id": 5,
+        "ingredients": "A Combination of Cheeses: 2 Layers of Mozzarella, Feta, American cheese, Oregano & Signature Tomato Sauce",
+        "name": "Four Cheeses",
+        "price": 40
+    },
+    "success": true
+}
+```
+#### DELETE /pizza/<int:pizza_id>
+```bash
+{
+    "deleted": 5,
+    "success": true
+}
+```
 ## Testing
 To run the tests, run
 ```
