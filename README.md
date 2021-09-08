@@ -38,7 +38,7 @@ python -m flask run
 
 ```
 
-### API Referance 
+# API Referance 
 ## Error Handling
 
 
