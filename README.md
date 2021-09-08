@@ -40,12 +40,68 @@ python -m flask run
 
 # API Referance 
 ## Error Handling
-
+- Error are returnes as JSON objects in the following format:
+```bash
+{
+            "success": False,
+            "error": 422,
+            "message": "unprocessable"
+        }
+```
+- The API will return these error types when request fail: 
+   - 400: Bad Request
+   - 404: Not found
+   - 422: unprocessable
 
 ## Endpoints 
-#### GET 
+#### GET /pizza
 
-#### GET 
+```bash
+{
+{
+    "pizza": [
+        {
+            "id": 2,
+            "ingredients": "Grilled Chicken breast, Onions, BBQ Sauce & Mozzarella",
+            "name": "BBQ Chicken",
+            "price": 50
+        },
+        {
+            "id": 1,
+            "ingredients": "San Marzano tomatoes, mozzarella cheese, fresh basil, salt",
+            "name": "margherita",
+            "price": 45
+        }
+    ],
+    "success": true
+}
+
+```
+#### GET /orders
+```bash
+{
+    "order": [
+        {
+            "id": 2,
+            "order_time": "09/06/2021, 15:00:00",
+            "pickup_time": "09/06/2021, 15:30:00",
+            "pizza_id": 1,
+            "quantity": 3,
+            "user_id": 1
+        },
+        {
+            "id": 1,
+            "order_time": "09/05/2021, 15:37:04",
+            "pickup_time": "09/05/2021, 16:00:00",
+            "pizza_id": 1,
+            "quantity": 2,
+            "user_id": 1
+        }
+    ],
+    "success": true
+}
+
+```
 
 #### POST
 
