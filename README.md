@@ -50,6 +50,7 @@ ALGORITHMS = ['RS256']
 API_AUDIENCE = 'dev'
 
 ```
+- [Roles]: ejeiei
 
 # API Referance 
 ## Error Handling
