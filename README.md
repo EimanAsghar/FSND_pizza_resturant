@@ -219,3 +219,5 @@ Can post:orders
 }
 ```
  # Heroku Deployment
+This project is deployed to Heroku at the following link: 
+https://fsnd-pizza-restaurant.herokuapp.com/
