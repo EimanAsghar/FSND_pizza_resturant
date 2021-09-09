@@ -38,6 +38,18 @@ export FLASK_ENV=development
 python -m flask run
 
 ```
+- [Roles]
+- [Permissions]
+- 
+# Authentication
+Authentication and Authorization is implemented using Auth0 
+```bash
+
+AUTH0_DOMAIN = 'fsnd-pizza-restaurant.us.auth0.com'
+ALGORITHMS = ['RS256']
+API_AUDIENCE = 'dev'
+
+```
 
 # API Referance 
 ## Error Handling
@@ -184,13 +196,5 @@ python -m flask run
     "deleted": 5,
     "success": true
 }
-```
-## Testing
-To run the tests, run
-```
-dropdb resturant_test
-createdb resturant_test
-psql resturant_test < resturant.psql
-python test_app.py
 ```
 
