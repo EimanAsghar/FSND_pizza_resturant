@@ -38,9 +38,6 @@ export FLASK_ENV=development
 python -m flask run
 
 ```
-- [Roles]
-- [Permissions]
-- 
 # Authentication
 Authentication and Authorization is implemented using Auth0 
 ```bash
@@ -50,7 +47,10 @@ ALGORITHMS = ['RS256']
 API_AUDIENCE = 'dev'
 
 ```
-- [Roles]: ejeiei
+## Role
+- [Manager]
+- [Customer]
+## Permissions
 
 # API Referance 
 ## Error Handling
