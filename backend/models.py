@@ -12,9 +12,6 @@ from datetime import datetime
 # 1- Two classes with primary keys at at least two attributes each
 # 2- [Optional but encouraged] One-to-many or many-to-many relationships between classes
 
-database_name = "resturant"
-database_path = "postgresql://postgres:1998@{}/{}".format(
-    'localhost:5432', database_name)
 
 db = SQLAlchemy()
 
@@ -24,8 +21,12 @@ setup_db(app)
 '''
 
 
-def setup_db(app, database_path=database_path):
+def setup_db(app):
 
+    database_name = "resturant"
+    default_database_path = "postgresql://postgres:1998@{}/{}".format(
+    'localhost:5432', database_name)
+    database_path = os.getenv('DATABASE_URL', default_database_path)
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
@@ -33,6 +34,9 @@ def setup_db(app, database_path=database_path):
 
     Migrate(app, db)
 
+def db_drop_and_create_all():
+    db.drop_all()
+    db.create_all()
 
 class user(db.Model):
     id = db.Column(Integer, primary_key=True)

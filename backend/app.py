@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from models import (
     setup_db,
+    db_drop_and_create_all,
     user,
     order,
     pizza
@@ -37,6 +38,9 @@ def create_app(test_config=None):
     app = Flask(__name__)
     setup_db(app)
 
+    """ uncomment at the first time running the app """
+    #db_drop_and_create_all()
+    
     CORS(app, resources={r"/*": {"origins": "*"}})
 
     @app.after_request
