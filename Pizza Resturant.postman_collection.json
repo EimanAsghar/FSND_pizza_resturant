@@ -1,0 +1,553 @@
+{
+	"info": {
+		"_postman_id": "4f9da3d5-8677-4868-a231-6b48dfdbfdde",
+		"name": "Pizza Resturant",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Manager",
+			"item": [
+				{
+					"name": "Get all pizza",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "get all order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "get own order(ERROR)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/orders/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"orders",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new pizza",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"name\": \"Four Cheeses\",\r\n            \"price\": \"30\",\r\n            \"ingredients\":\"A Combination of Cheeses: 2 Layers of Mozzarella, Feta, American cheese, Oregano & Signature Tomato Sauce\"\r\n        }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/pizza",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"pizza"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "make order(ERROR)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/orders/1/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"orders",
+								"1",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit pizza",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"price\": 20\r\n            \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/pizza/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"pizza",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete pizza",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/pizza/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"pizza",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImJCeE5FVU5kUThfTGhlUmxidlU3YyJ9.eyJpc3MiOiJodHRwczovL2ZzbmQtcGl6emEtcmVzdGF1cmFudC51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjEzOGE2YWU4ZjQ3MTQwMDcwZWVkOTQ2IiwiYXVkIjoiZGV2IiwiaWF0IjoxNjMxMTMzODExLCJleHAiOjE2MzExNDEwMTEsImF6cCI6ImFCaWNLcUh5OHZjN0FpY0E0ejJOSnVCUFlIY2JrbzRUIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6cGl6emEiLCJnZXQ6b3JkZXJzIiwicGF0Y2g6cGl6emEiLCJwb3N0OnBpenphIl19.0hG33G2qENWsTI1j3i5_NrB5ZAzjQjgv03EQRFFGrVvZyPWPOHyAfs8_L_rrKGXxSh24XOkOtEOZSthFlPS20UBq2DAqd3qeEM5GDOXz2RUVnyzQysw0-0d-dmaYnguDYYJVbLLC3uq6sz9H9c-_0qVBvVHP0ZFJWp_gpylr77FmX6avx0yMUpqS5gPXnrXu6K1FXCcrWcMkOpbBAG3YsabGqcZ7H9JLrY-AFxIOq6ARX0bqEMS2AxGYBjpwhdPenPM3l5mJAo0LC5mZVioX_RHdYt3FwbQTQWUWnw0BPcemeDUSMsP-5MNLFd92bGuGTgsCO69WJFqy27v_Jkg-cA",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Get all pizza",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/pizza",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"pizza"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all order (ERROR)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get own order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/orders/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"orders",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add pizza (ERROR)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"name\": \"Four Cheeses\",\r\n            \"price\": \"30\",\r\n            \"ingredients\":\"A Combination of Cheeses: 2 Layers of Mozzarella, Feta, American cheese, Oregano & Signature Tomato Sauce\"\r\n        }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/pizza",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"pizza"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "make order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "Edit pizza(ERROR)",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"price\": 40\r\n            \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/pizza/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"pizza",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete pizza (ERROR)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImJCeE5FVU5kUThfTGhlUmxidlU3YyJ9.eyJpc3MiOiJodHRwczovL2ZzbmQtcGl6emEtcmVzdGF1cmFudC51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjEzOTI3NDA2Mzc2MmMwMDcwYmY5OTVmIiwiYXVkIjoiZGV2IiwiaWF0IjoxNjMxMTM3ODQ2LCJleHAiOjE2MzExNDUwNDYsImF6cCI6ImFCaWNLcUh5OHZjN0FpY0E0ejJOSnVCUFlIY2JrbzRUIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6c3BlY2lmaWNfb3JkZXJzIiwicG9zdDpvcmRlcnMiXX0.3BNp5kr2WVUWT_05uRyTbgfdv-NkCoZjrUEqvaLXI6eP6NMOOM7la3g2dSkOTCqcMaka-WpTdfe0iyZWpEoKIO0zRy9rxe3bCmYtob5XAtesdhXuLrdr8MdEefqHmvbQXCFv21qmol2OXUS-QobaMviO3MZBxG1MDYw-JUw-8Gf0xcjnypJA_mwul6GICovaAT3cikENT1qRxzNsDREq-pL_3E2CjrsmWGnS3149j5BFeQGXxUh8Lto4GBw5kyHhLES7WDXqn1xMrRdUAVLk1_rzF_TYdDS_PjpQzBsxFGYw1EQGBZO0dy66k53mkJLwo3PsjSs_zUSikpgCfP2c1w",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "http://localhost:5000/pizza",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/pizza",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"pizza"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/orders/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/orders/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orders",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"bayan\",\r\n    \"email\":  \"bayan@gmail.com\",\r\n    \"address\": \"albsaten\",\r\n    \"phone\": \"0548673985\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/pizza",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n            \"name\": \"Four Cheeses\",\r\n            \"price\": \"30\",\r\n            \"ingredients\":\"A Combination of Cheeses: 2 Layers of Mozzarella, Feta, American cheese, Oregano & Signature Tomato Sauce\"\r\n        }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/pizza",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"pizza"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/orders/1/create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n            \"pizza_id\": \"2\",\r\n            \"quantity\": \"5\"\r\n\r\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/orders/1/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orders",
+						"1",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/pizza/1",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n            \"price\": 40\r\n            \r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/pizza/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"pizza",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/pizza/3",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/pizza/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"pizza",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

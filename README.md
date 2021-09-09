@@ -1,5 +1,5 @@
 # Pizza Resturant
-
+The website makes it easy for customers to order pizza from anywhere (home, work, garden), then the customer picks up the order from the restaurant on time.
 # Geting Started: 
 
 # Backend
@@ -38,7 +38,39 @@ export FLASK_ENV=development
 python -m flask run
 
 ```
+# Authentication
+Authentication and Authorization is implemented using Auth0 
+```bash
 
+AUTH0_DOMAIN = 'fsnd-pizza-restaurant.us.auth0.com'
+ALGORITHMS = ['RS256']
+API_AUDIENCE = 'dev'
+
+```
+### Role
+- Manager: cna view all pizza and order, add, edit and delete pizza.
+- User: can view all pizza, make an order and view their own order.
+### Permissions
+- Manager:
+```
+Can get:orders
+```
+```
+Can post:pizza
+```
+```
+Can patch:pizza
+```
+```
+Can delete:pizza
+```
+- User: 
+```
+Can get:specific_orders
+```
+```
+Can post:orders
+```
 # API Referance 
 ## Error Handling
 - Error are returnes as JSON objects in the following format:
@@ -184,13 +216,5 @@ python -m flask run
     "deleted": 5,
     "success": true
 }
-```
-## Testing
-To run the tests, run
-```
-dropdb resturant_test
-createdb resturant_test
-psql resturant_test < resturant.psql
-python test_flaskr.py
 ```
 
