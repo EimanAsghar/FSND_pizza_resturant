@@ -51,9 +51,10 @@ API_AUDIENCE = 'dev'
 - Manager: cna view all pizza and order, add, edit and delete pizza.
 - User: can view all pizza, make an order and view their own order.
 ### Permissions
-- Manager: 
+- Manager:
+Can 
 ```
-Can get:orders
+get:orders
 ```
 ```
 Can post:pizza
