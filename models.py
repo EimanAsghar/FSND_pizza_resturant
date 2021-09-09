@@ -27,6 +27,8 @@ def setup_db(app):
     default_database_path = "postgresql://postgres:1998@{}/{}".format(
     'localhost:5432', database_name)
     database_path = os.getenv('DATABASE_URL', default_database_path)
+    if database_path.startswith("postgres://"):
+        database_path.replace("://", "ql://", 1)
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
