@@ -47,10 +47,10 @@ ALGORITHMS = ['RS256']
 API_AUDIENCE = 'dev'
 
 ```
-## Role
-- [Manager]
-- [Customer]
-## Permissions
+### Role
+- Manager: cna view all pizza and order, edit and delete pizza.
+- Customer: can view all pizza, make an order and view their own order.
+### Permissions
 
 # API Referance 
 ## Error Handling
