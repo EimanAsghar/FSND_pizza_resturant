@@ -35,7 +35,7 @@ class PizzaResturantTestCase(unittest.TestCase):
         """Executed after reach test"""
         pass
 
-    # # Success for all pizza
+    # Success for all pizza
     # def test_get_all_pizza(self):
     #     res = self.client().get('/pizza')
     #     data = json.loads(res.data)
