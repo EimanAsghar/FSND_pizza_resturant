@@ -1,7 +1,7 @@
 import click
 from flask.cli import with_appcontext
 
-from models import (
+from .models import (
     db,
     setup_db,
     db_drop_and_create_all,
