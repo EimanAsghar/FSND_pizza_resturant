@@ -48,8 +48,8 @@ API_AUDIENCE = 'dev'
 
 ```
 ### Role
-- Manager: cna view all pizza and order, edit and delete pizza.
-- Customer: can view all pizza, make an order and view their own order.
+- Manager: cna view all pizza and order, add, edit and delete pizza.
+- User: can view all pizza, make an order and view their own order.
 ### Permissions
 
 # API Referance 
