@@ -52,9 +52,8 @@ API_AUDIENCE = 'dev'
 - User: can view all pizza, make an order and view their own order.
 ### Permissions
 - Manager:
-Can 
 ```
-get:orders
+Can get:orders
 ```
 ```
 Can post:pizza
