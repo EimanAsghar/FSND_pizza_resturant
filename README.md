@@ -1,8 +1,7 @@
 # Pizza Resturant
-The website makes it easy for customers to order pizza from anywhere (home, work, garden), then the customer picks up the order from the restaurant on time.
-# Geting Started: 
+The website makes it easy for customers to order pizza from anywhere (home, work, garden), then the customer picks up the order from the restaurant on time. 
 
-# Backend
+#  Geting Started
 ### Installing Dependencies for the Backend
 
 1. **Python 3.7** - Follow instructions to install the latest version of python for your platform in the [python docs](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python)
@@ -38,6 +37,8 @@ export FLASK_ENV=development
 python -m flask run
 
 ```
+Navigate to http://127.0.0.1:5000/ or http://localhost:5000
+
 # Authentication
 Authentication and Authorization is implemented using Auth0 
 ```bash
@@ -217,4 +218,4 @@ Can post:orders
     "success": true
 }
 ```
-
+ # Heroku Deployment
