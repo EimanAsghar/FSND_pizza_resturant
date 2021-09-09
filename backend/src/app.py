@@ -66,7 +66,7 @@ def create_app(test_config=None):
 
     # view all order for manager
     @app.route('/orders')
-    #@requires_auth('get:orders')
+    @requires_auth('get:orders')
     def get_orders(payload):
         order_result = order.query.order_by(order.order_time.desc()).all()
         order_info = [o.information() for o in order_result]
@@ -78,7 +78,7 @@ def create_app(test_config=None):
 
     # view order for spacific customer
     @app.route('/orders/<int:userid>')
-    #@requires_auth('get:specific_orders')
+    @requires_auth('get:specific_orders')
     def get_spacific_orders(payload, userid):
 
         find_user = user.query.filter(user.id == userid).one_or_none()
@@ -123,7 +123,7 @@ def create_app(test_config=None):
 
     # add new pizza by (Manager)
     @app.route('/pizza', methods=['POST'])
-    #@requires_auth('post:pizza')
+    @requires_auth('post:pizza')
     def add_new_pizza(payload):
 
         body = request.get_json()
@@ -143,7 +143,7 @@ def create_app(test_config=None):
 
     # make order for (customers)
     @app.route('/orders/<int:user_id>/create', methods=['POST'])
-    #@requires_auth('post:orders')
+    @requires_auth('post:orders')
     def create_orders(payload, user_id):
 
         find_user = user.query.filter(user.id == user_id).one_or_none()
@@ -177,7 +177,7 @@ def create_app(test_config=None):
     # Edit pizza details by (Manager)
 
     @app.route('/pizza/<int:pizza_id>', methods=['PATCH'])
-    #@requires_auth('patch:pizza')
+    @requires_auth('patch:pizza')
     def edit_pizza(payload, pizza_id):
 
         # get spacific pizza by id
@@ -209,7 +209,7 @@ def create_app(test_config=None):
     # Delete spacifi pizza by (Manager)
 
     @app.route('/pizza/<int:pizza_id>', methods=['DELETE'])
-    #@requires_auth('delete:pizza')
+    @requires_auth('delete:pizza')
     def delete_pizza(payload, pizza_id):
         try:
             # delete pizza based on spacific id

@@ -1,6 +1,6 @@
 import os
 import unittest
-import json
+import sys, json
 from flask_sqlalchemy import SQLAlchemy
 
 from app import create_app
@@ -35,13 +35,13 @@ class PizzaResturantTestCase(unittest.TestCase):
         """Executed after reach test"""
         pass
 
-    # Success for all pizza
-    def test_get_all_pizza(self):
-        res = self.client().get('/pizza')
-        data = json.loads(res.data)
-        # check the status code
-        self.assertEqual(res.status_code, 200)
-        self.assertEqual(data['success'], True)
+    # # Success for all pizza
+    # def test_get_all_pizza(self):
+    #     res = self.client().get('/pizza')
+    #     data = json.loads(res.data)
+    #     # check the status code
+    #     self.assertEqual(res.status_code, 200)
+    #     self.assertEqual(data['success'], True)
 
 #     # Success for all order
 #     def test_get_all_orders(self):
