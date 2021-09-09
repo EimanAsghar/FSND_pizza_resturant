@@ -1,5 +1,5 @@
 # Pizza Resturant
-
+The website makes it easy for customers to order pizza from anywhere (home, work, garden) and then the customer receives the order from the restaurant on time.
 # Geting Started: 
 
 # Backend
