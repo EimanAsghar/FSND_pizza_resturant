@@ -1,8 +1,7 @@
 # Pizza Resturant
-The website makes it easy for customers to order pizza from anywhere (home, work, garden), then the customer picks up the order from the restaurant on time.
-# Geting Started: 
+The website makes it easy for customers to order pizza from anywhere (home, work, garden), then the customer picks up the order from the restaurant on time. 
 
-# Backend
+#  Geting Started
 ### Installing Dependencies for the Backend
 
 1. **Python 3.7** - Follow instructions to install the latest version of python for your platform in the [python docs](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python)
@@ -11,7 +10,7 @@ The website makes it easy for customers to order pizza from anywhere (home, work
 2. **Virtual Enviornment** - We recommend working within a virtual environment whenever using Python for projects. This keeps your dependencies for each project separate and organaized. Instructions for setting up a virual enviornment for your platform can be found in the [python docs](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
 
 
-3. **PIP Dependencies** - Once you have your virtual environment setup and running, install dependencies by naviging to the `/backend` directory and running:
+3. **PIP Dependencies** - Once you have your virtual environment setup and running, install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
@@ -27,7 +26,7 @@ This will install all of the required packages we selected within the `requireme
 
 ### Running the server
 
-From within the `./src` directory first ensure you are working using your created virtual environment.
+first ensure you are working using your created virtual environment.
 
 To run the server, execute:
 
@@ -38,6 +37,8 @@ export FLASK_ENV=development
 python -m flask run
 
 ```
+Navigate to http://127.0.0.1:5000/ or http://localhost:5000
+
 # Authentication
 Authentication and Authorization is implemented using Auth0 
 ```bash
@@ -217,4 +218,6 @@ Can post:orders
     "success": true
 }
 ```
-
+ # Heroku Deployment
+This project is deployed to Heroku at the following link: 
+https://fsnd-pizza-restaurant.herokuapp.com/
